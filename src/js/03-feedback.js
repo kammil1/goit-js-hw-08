@@ -15,7 +15,7 @@ form.addEventListener(
         message: inputMessage.value,
       })
     );
-    btnSubmit.disabled = !(inputEmail.value && inputMessage.value);
+    // btnSubmit.disabled = !(inputEmail.value && inputMessage.value);
   }, 500)
 );
 
@@ -31,16 +31,23 @@ const currentInput = () => {
 form.addEventListener('submit', event => {
   event.preventDefault();
 
+  const dataSet = {
+    email: inputEmail.value.trim(),
+    message: inputMessage.value.trim(),
+  };
+  if (dataSet.email === '' || dataSet.message === '') {
+    alert('Wypełnij wszystkie pola');
+  }
+
   console.log({
     email: inputEmail.value,
     message: inputMessage.value,
   });
 
-  form.reset();
   localStorage.removeItem('feedback-form-state');
+  form.reset();
+
   inputEmail.value = '';
   inputMessage.value = '';
-  btnSubmit.disabled = true;
+  // btnSubmit.disabled = true;
 });
-
-currentInput();
